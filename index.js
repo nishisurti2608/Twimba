@@ -7,6 +7,16 @@ tweetBtn.addEventListener("click", function () {
   console.log(tweetInput.value);
 });
 
+document.addEventListener("click", function (event) {
+  if (event.target.dataset.like) {
+    handleClick(event.target.dataset.like);
+  }
+});
+
+function handleClick(tweetId) {
+  console.log(tweetId);
+}
+
 function getFeedHtml() {
   let feedHtml = " ";
 
