@@ -14,7 +14,17 @@ document.addEventListener("click", function (event) {
 });
 
 function handleClick(tweetId) {
-  console.log(tweetId);
+  const targetTweetObj = tweetsData.filter(function (tweet) {
+    return tweet.uuid === tweetId;
+  })[0];
+  if (!targetTweetObj.isLiked) {
+    targetTweetObj.likes++;
+    targetTweetObj.isLiked = true;
+  } else {
+    targetTweetObj.likes--;
+    targetTweetObj.isLiked = false;
+  }
+  render();
 }
 
 function getFeedHtml() {
