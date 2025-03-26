@@ -7,9 +7,15 @@ tweetBtn.addEventListener("click", function () {
   console.log(tweetInput.value);
 });
 
+// Listening for events on all 3 icons
+
 document.addEventListener("click", function (event) {
   if (event.target.dataset.like) {
     handleClick(event.target.dataset.like);
+  }
+
+  if (event.target.dataset.retweet) {
+    handleRetweetClick(event.target.dataset.retweet);
   }
 });
 
@@ -19,11 +25,24 @@ function handleClick(tweetId) {
   })[0];
   if (!targetTweetObj.isLiked) {
     targetTweetObj.likes++;
-    targetTweetObj.isLiked = true;
   } else {
     targetTweetObj.likes--;
-    targetTweetObj.isLiked = false;
   }
+  targetTweetObj.isLiked = !targetTweetObj.isLiked;
+  render();
+}
+
+function handleRetweetClick(tweetId) {
+  const targetTweetObj = tweetsData.filter(function (tweet) {
+    return tweet.uuid === tweetId;
+  })[0];
+
+  if (targetTweetObj.isRetweeted) {
+    targetTweetObj.retweets--;
+  } else {
+    targetTweetObj.retweets++;
+  }
+  targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted;
   render();
 }
 
